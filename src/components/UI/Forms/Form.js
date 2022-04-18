@@ -11,6 +11,10 @@ let fieldData = new Map();
 const Form = (props) => {
   const submitFormHandler = (event) => {
     event.preventDefault();
+
+    console.log('Submitting Data');
+    // Might Remove Disabled Fields Later
+    console.log(Object.fromEntries(fieldData));
   };
 
   const fieldChangeHanlder = (name, value) => {

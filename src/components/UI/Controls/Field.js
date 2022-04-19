@@ -1,11 +1,10 @@
-import { useState } from "react";
 
 const Field = (props) => {
-  const [fieldValue, setFieldValue] = useState(); // Is this even needed? Will Decide Later
-  const { id, label, type, name, handleChange} = props;
+  //const [fieldValue, setFieldValue] = useState(); // Is this even needed? Will Decide Later
+  const { id, label, type, name, handleChange, value} = props;
 
+  console.log("Field Component");
   const fieldChangeHandler = (event) => {
-    setFieldValue(event.target.value)
     handleChange(name,event.target.value)
   };
 
@@ -16,7 +15,7 @@ const Field = (props) => {
         type={type}
         id={id}
         onChange={fieldChangeHandler}
-        value={fieldValue}
+        value={value || ''}
       />
     </div>
   );

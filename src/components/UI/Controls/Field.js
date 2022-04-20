@@ -1,22 +1,35 @@
+import { TextField } from "@mui/material";
 
 const Field = (props) => {
-  //const [fieldValue, setFieldValue] = useState(); // Is this even needed? Will Decide Later
-  const { id, label, type, name, handleChange, value} = props;
+  const { handleChange, data } = props;
+  const { id, label, ctrlType, type, value} = data;
 
-  console.log("Field Component");
   const fieldChangeHandler = (event) => {
-    handleChange(name,event.target.value)
+    handleChange(id, event.target.value);
+  };
+
+  const getInput = () => {
+    switch (ctrlType) {
+      case "TXT":
+        return (
+          <TextField
+            id={id}
+            type={type}
+            label={label}
+            value={value || ""}
+            onChange={fieldChangeHandler}
+            fullWidth
+          />
+        );
+        break;
+      default: 
+       return;
+    }
   };
 
   return (
-    <div>
-      <label htmlFor={id}>{label}</label>
-      <input
-        type={type}
-        id={id}
-        onChange={fieldChangeHandler}
-        value={value || ''}
-      />
+    <div style={{marginTop:20}}>
+      {getInput()}
     </div>
   );
 };

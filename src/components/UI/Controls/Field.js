@@ -1,8 +1,8 @@
-import { TextField } from "@mui/material";
+import { TextField, MenuItem } from "@mui/material";
 
 const Field = (props) => {
   const { handleChange, data } = props;
-  const { id, label, ctrlType, type, value} = data;
+  const { id, label, description, ctrlType, type, value, required, options} = data;
 
   const fieldChangeHandler = (event) => {
     handleChange(id, event.target.value);
@@ -16,14 +16,34 @@ const Field = (props) => {
             id={id}
             type={type}
             label={label}
+            helperText={description}
             value={value || ""}
             onChange={fieldChangeHandler}
             fullWidth
+            required={required}
           />
         );
-        break;
+        case "DDL":
+        return (
+          <TextField
+            id={id}
+            select
+            type={type}
+            label={label}
+            value={value || ""}
+            onChange={fieldChangeHandler}
+            fullWidth
+            required={required}
+          >
+            {options.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+          </TextField>
+        );
       default: 
-       return;
+       return (<p>Invalid Input Type</p>);
     }
   };
 

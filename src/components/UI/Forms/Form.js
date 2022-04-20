@@ -4,21 +4,31 @@ import Card from "../Controls/Card";
 import { Button } from "@mui/material";
 
 const formData = [
-  { id: "firstName", label: "First Name", ctrlType: "TXT", type: "text" },
+  { id: "salutation", label: "Salutation", ctrlType: "DDL", required: true, options: [{label: 'Mr', value: '01'},  {label: 'Mrs', value:'02'}] },
   {
-    id: "lastName",
-    label: "Last Name",
+    id: "firstName",
+    label: "First Name",
     ctrlType: "TXT",
     type: "text",
-    value: "Ibrahim",
+    validations: {
+      requiredOn: {
+        fieldId: 'age',
+        operator: '>',
+        value: '18'
+      },
+    },
   },
-  { id: "age", label: "Age", ctrlType: "TXT", type: "number" },
+  { id: "age", label: "Age", ctrlType: "TXT", type: "number", validations: {
+      requiredOn: {
+        fieldId: 'salutation',
+        value: '02'
+      }, 
+    }
+  }
 ];
 
 const Form = (props) => {
   const [fieldList, setFieldList] = useState(formData);
-
-  console.log("Form");
 
   const submitFormHandler = (event) => {
     event.preventDefault();
@@ -39,18 +49,54 @@ const Form = (props) => {
     let updatedFieldList = [...fieldList];
     updatedFieldList[changeFieldIndex].value = value;
 
+    executeValidations(updatedFieldList);
+
     setFieldList(updatedFieldList);
-    console.log(updatedFieldList);
   };
+
+  const executeValidations = (fieldsList) => {
+    for(const field of fieldsList) {
+      if(field.validations) {
+        if(field.validations.requiredOn) {
+          const dependentField = getFieldValue(field.validations.requiredOn.fieldId);
+          field.required = isRequired(field.validations.requiredOn, dependentField);
+        }
+      }
+    }
+  }
+
+  const isRequired = (requiredOnObject, dependentField) => {
+    let isRequired = false;
+    if(dependentField.value && requiredOnObject.value) {
+
+      switch (requiredOnObject.operator) {
+        case '>': 
+          isRequired = +dependentField.value > +requiredOnObject.value;
+          break;
+        case '<':  
+          isRequired = +dependentField.value < +requiredOnObject.value;
+          break; 
+        default:
+          isRequired = requiredOnObject.value === dependentField.value;
+      }
+    }
+
+    return isRequired;
+  }
+
+  const getFieldValue = (fieldId) => {
+    const field = fieldList.find((x) => x.id === fieldId);
+    return field;
+  }
 
   return (
     <Card>
-      <form onSubmit={submitFormHandler}>
+      <form>
         {fieldList.map((data) => (
           <Field key={data.id} data={data} handleChange={fieldChangeHanlder} />
         ))}
         <div style={{ marginTop: 20 }}>
-          <Button fullWidth variant="outlined" type="submit">
+          <Button onClick={submitFormHandler} fullWidth variant="outlined" type="submit">
             Submit
           </Button>
         </div>

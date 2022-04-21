@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Field from "../Controls/Field";
 import Card from "../Controls/Card";
 import { Button } from "@mui/material";
+import { isRequired, isReadOnly, isDisabled, isEnabled } from "./FormValidationHelper";
 
 const Form = (props) => {
   const [fieldList, setFieldList] = useState(props.formData);
@@ -25,44 +26,56 @@ const Form = (props) => {
     updatedFieldList[changeFieldIndex].value = value;
 
     executeValidations(updatedFieldList);
-
     setFieldList(updatedFieldList);
   };
 
   const executeValidations = (fieldsList) => {
-    for(const field of fieldsList) {
-      if(field.validations) {
-        if(field.validations.requiredOn) {
-          const dependentField = getFieldValue(field.validations.requiredOn.fieldId);
-          field.required = isRequired(field.validations.requiredOn, dependentField);
+    for (const field of fieldsList) {
+      if (field.validations) {
+        if (field.validations.requiredOn) {
+          const dependentField = getFieldValue(
+            field.validations.requiredOn.fieldId
+          );
+          field.required = isRequired(
+            field.validations.requiredOn,
+            dependentField
+          );
+        }
+        if (field.validations.readOnlyOn) {
+          const dependentField = getFieldValue(
+            field.validations.readOnlyOn.fieldId
+          );
+          field.readOnly = isReadOnly(
+            field.validations.readOnlyOn,
+            dependentField
+          );
+        }
+        if (field.validations.disableOn) {
+          const dependentField = getFieldValue(
+            field.validations.disableOn.fieldId
+          );
+          field.disabled = isDisabled(
+            field.validations.disableOn,
+            dependentField
+          );
+        }
+        if (field.validations.enableOn) {
+          const dependentField = getFieldValue(
+            field.validations.enableOn.fieldId
+          );
+          field.disabled = !isEnabled(
+            field.validations.enableOn,
+            dependentField
+          );
         }
       }
     }
-  }
-
-  const isRequired = (requiredOnObject, dependentField) => {
-    let isRequired = false;
-    if(dependentField.value && requiredOnObject.value) {
-
-      switch (requiredOnObject.operator) {
-        case '>': 
-          isRequired = +dependentField.value > +requiredOnObject.value;
-          break;
-        case '<':  
-          isRequired = +dependentField.value < +requiredOnObject.value;
-          break; 
-        default:
-          isRequired = requiredOnObject.value === dependentField.value;
-      }
-    }
-
-    return isRequired;
-  }
+  };
 
   const getFieldValue = (fieldId) => {
     const field = fieldList.find((x) => x.id === fieldId);
     return field;
-  }
+  };
 
   return (
     <Card>
@@ -71,7 +84,12 @@ const Form = (props) => {
           <Field key={data.id} data={data} handleChange={fieldChangeHanlder} />
         ))}
         <div style={{ marginTop: 20 }}>
-          <Button onClick={submitFormHandler} fullWidth variant="outlined" type="submit">
+          <Button
+            onClick={submitFormHandler}
+            fullWidth
+            variant="outlined"
+            type="submit"
+          >
             Submit
           </Button>
         </div>

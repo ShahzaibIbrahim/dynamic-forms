@@ -44,6 +44,37 @@
       "id": "pob",
       "label": "Place Of Birth",
       "ctrlType": "TXT",
-      "type": "text"
+      "type": "text",
+      "value": "Madrid",
+      "validations": {
+        "readOnlyOn": {
+          "fieldId": "salutation",
+          "value": "01"
+        }
+      }
+    },
+    {
+      "id": "province",
+      "label": "Province",
+      "ctrlType": "TXT",
+      "type": "text",
+      "validations": {
+        "enableOn": {
+          "fieldId": "salutation",
+          "value": "01"
+        }
+      }
+    },
+    {
+      "id": "country",
+      "label": "Country",
+      "ctrlType": "TXT",
+      "type": "text",
+      "validations": {
+        "disableOn": {
+          "fieldId": "salutation",
+          "value": "01"
+        }
+      }
     }
   ]

@@ -5,7 +5,20 @@ import ClearIcon from '@mui/icons-material/Clear';
 const Field = (props) => {
   const inputValue = useRef(null);
   const { handleChange, data } = props;
-  const { id, label, description, ctrlType, type, value, required, options } = data;
+  const {
+    id,
+    label,
+    description,
+    ctrlType,
+    type,
+    value,
+    required,
+    readOnly,
+    disabled,
+    options,
+  } = data;
+
+  const isReadOnly = (readOnly === null || readOnly === undefined) ? false: readOnly;
 
   const fieldChangeHandler = (event) => {
     handleChange(id, event.target.value);
@@ -16,6 +29,10 @@ const Field = (props) => {
   };
 
   const getInput = () => {
+    if(disabled) {
+      return;
+    }
+
     switch (ctrlType) {
       case "TXT":
         return (
@@ -31,6 +48,7 @@ const Field = (props) => {
             variant="standard"
             required={required}
             InputProps={{
+              readOnly: isReadOnly,
               endAdornment:
                 value && value.trim().length > 0 ? (
                   <InputAdornment position="end">
@@ -50,6 +68,7 @@ const Field = (props) => {
             <Autocomplete
               options={options}
               id={id}
+              readOnly={isReadOnly}
               clearOnEscape
               getOptionLabel={(option) => option.label}
               value={currentValue}

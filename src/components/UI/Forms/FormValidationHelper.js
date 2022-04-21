@@ -3,16 +3,7 @@
 export const isRequired = (requiredOnObject, dependentField) => {
     let isRequired = false;
     if (dependentField.value && requiredOnObject.value) {
-      switch (requiredOnObject.operator) {
-        case ">":
-          isRequired = +dependentField.value > +requiredOnObject.value;
-          break;
-        case "<":
-          isRequired = +dependentField.value < +requiredOnObject.value;
-          break;
-        default:
-          isRequired = requiredOnObject.value === dependentField.value;
-      }
+        isRequired = resolveExpression(dependentField.value, requiredOnObject.operator, requiredOnObject.value);
     }
     return isRequired;
   };
@@ -21,16 +12,7 @@ export const isRequired = (requiredOnObject, dependentField) => {
 export const isReadOnly = (readOnlyOnObject, dependentField) => {
     let isReadOnly = false;
     if (dependentField.value && readOnlyOnObject.value) {
-      switch (readOnlyOnObject.operator) {
-        case ">":
-          isReadOnly = +dependentField.value > +readOnlyOnObject.value;
-          break;
-        case "<":
-          isReadOnly = +dependentField.value < +readOnlyOnObject.value;
-          break;
-        default:
-          isReadOnly = readOnlyOnObject.value === dependentField.value;
-      }
+        isReadOnly = resolveExpression(dependentField.value, readOnlyOnObject.operator, readOnlyOnObject.value);
     }
 
     return isReadOnly;
@@ -39,16 +21,7 @@ export const isReadOnly = (readOnlyOnObject, dependentField) => {
 export const isDisabled = (disableOnObject, dependentField) => {
     let isDisabled = false;
     if (dependentField.value && disableOnObject.value) {
-      switch (disableOnObject.operator) {
-        case ">":
-            isDisabled = +dependentField.value > +disableOnObject.value;
-          break;
-        case "<":
-            isDisabled = +dependentField.value < +disableOnObject.value;
-          break;
-        default:
-            isDisabled = disableOnObject.value === dependentField.value;
-      }
+        isDisabled = resolveExpression(dependentField.value, disableOnObject.operator, disableOnObject.value);
     }
 
     return isDisabled;
@@ -57,17 +30,23 @@ export const isDisabled = (disableOnObject, dependentField) => {
 export const isEnabled = (enableOnObject, dependentField) => {
     let isEnabled = false;
     if (dependentField.value && enableOnObject.value) {
-      switch (enableOnObject.operator) {
-        case ">":
-            isEnabled = +dependentField.value > +enableOnObject.value;
-          break;
-        case "<":
-            isEnabled = +dependentField.value < +enableOnObject.value;
-          break;
-        default:
-            isEnabled = enableOnObject.value === dependentField.value;
-      }
+        isEnabled = resolveExpression(dependentField.value, enableOnObject.operator, enableOnObject.value);
     }
 
     return isEnabled;
   };
+
+const resolveExpression = (value1, operator, value2) => {
+        let condition = false;
+        switch (operator) {
+            case ">":
+                condition = +value1 > +value2;
+            break;
+            case "<":
+                condition = +value1 < +value2;
+            break;
+            default:
+                condition = value1 === value2;
+        }  
+        return condition;
+};

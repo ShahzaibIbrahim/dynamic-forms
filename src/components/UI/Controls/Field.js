@@ -1,5 +1,6 @@
 import { useRef } from "react";
-import { TextField, MenuItem, Button } from "@mui/material";
+import { TextField, Autocomplete, InputAdornment, IconButton } from "@mui/material";
+import ClearIcon from '@mui/icons-material/Clear';
 
 const Field = (props) => {
   const inputValue = useRef(null);
@@ -27,29 +28,41 @@ const Field = (props) => {
             value={value || ""}
             onChange={fieldChangeHandler}
             fullWidth
+            variant="standard"
             required={required}
+            InputProps={{
+              endAdornment:
+                value && value.trim().length > 0 ? (
+                  <InputAdornment position="end">
+                    <IconButton onClick={clearHandler} id="text-clear-btn-id">
+                      <ClearIcon id="text-clear-icon-id" />
+                    </IconButton>
+                  </InputAdornment>
+                ) : (
+                  ""
+                ),
+            }}
           />
         );
-      case "DDL":
-        return (
-          <TextField
-            id={id}
-            select
-            type={type}
-            label={label}
-            inputRef={inputValue}
-            value={value || ""}
-            onChange={fieldChangeHandler}
-            fullWidth
-            required={required}
-          >
-            {options.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-        );
+        case "DDL":
+          const currentValue = value? options.find((option) => option.value === value) : null;
+          return (
+            <Autocomplete
+              options={options}
+              id={id}
+              clearOnEscape
+              getOptionLabel={(option) => option.label}
+              value={currentValue}
+              onChange={(event, newValue) => {
+                handleChange(id, newValue? newValue.value : '');
+              }}
+              fullWidth
+              required={required}
+              renderInput={(params) => (
+                <TextField {...params} label={label} variant="standard" />
+              )}
+            />
+          );
       default:
         return <p>Invalid Input Type</p>;
     }
@@ -57,7 +70,6 @@ const Field = (props) => {
 
   return (
     <div style={{ marginTop: 20 }}>
-      <Button onClick={clearHandler}>Clear</Button>
       {getInput()}
     </div>
   );

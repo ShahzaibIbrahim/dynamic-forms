@@ -1,11 +1,9 @@
 import "./App.css";
-import Form from "./components/UI/Forms/Form";
+import DemoForm from "./pages/Demo/DemoForm";
 
 function App() {
   return (
-    <div className="container">
-      <Form />
-    </div>
+    <DemoForm/>
   );
 }
 

@@ -3,32 +3,8 @@ import Field from "../Controls/Field";
 import Card from "../Controls/Card";
 import { Button } from "@mui/material";
 
-const formData = [
-  { id: "salutation", label: "Salutation", ctrlType: "DDL", required: true, options: [{label: 'Mr', value: '01'},  {label: 'Mrs', value:'02'}] },
-  {
-    id: "firstName",
-    label: "First Name",
-    ctrlType: "TXT",
-    type: "text",
-    validations: {
-      requiredOn: {
-        fieldId: 'age',
-        operator: '>',
-        value: '18'
-      },
-    },
-  },
-  { id: "age", label: "Age", ctrlType: "TXT", type: "number", validations: {
-      requiredOn: {
-        fieldId: 'salutation',
-        value: '02'
-      }, 
-    }
-  }
-];
-
 const Form = (props) => {
-  const [fieldList, setFieldList] = useState(formData);
+  const [fieldList, setFieldList] = useState(props.formData);
 
   const submitFormHandler = (event) => {
     event.preventDefault();
@@ -45,7 +21,6 @@ const Form = (props) => {
 
   const fieldChangeHanlder = (id, value) => {
     const changeFieldIndex = fieldList.findIndex((x) => x.id === id);
-
     let updatedFieldList = [...fieldList];
     updatedFieldList[changeFieldIndex].value = value;
 

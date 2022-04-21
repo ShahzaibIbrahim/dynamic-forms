@@ -1,0 +1,49 @@
+[
+    {
+      "id": "salutation",
+      "label": "Salutation",
+      "ctrlType": "DDL",
+      "required": true,
+      "options": [
+        {
+          "label": "Mr",
+          "value": "01"
+        },
+        {
+          "label": "Mrs",
+          "value": "02"
+        }
+      ]
+    },
+    {
+      "id": "firstName",
+      "label": "First Name",
+      "ctrlType": "TXT",
+      "type": "text",
+      "validations": {
+        "requiredOn": {
+          "fieldId": "age",
+          "operator": ">",
+          "value": "18"
+        }
+      }
+    },
+    {
+      "id": "age",
+      "label": "Age",
+      "ctrlType": "TXT",
+      "type": "number",
+      "validations": {
+        "requiredOn": {
+          "fieldId": "salutation",
+          "value": "02"
+        }
+      }
+    },
+    {
+      "id": "pob",
+      "label": "Place Of Birth",
+      "ctrlType": "TXT",
+      "type": "text"
+    }
+  ]

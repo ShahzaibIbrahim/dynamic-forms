@@ -20,13 +20,7 @@
       "label": "First Name",
       "ctrlType": "TXT",
       "type": "text",
-      "validations": {
-        "requiredOn": {
-          "fieldId": "age",
-          "operator": ">",
-          "value": "18"
-        }
-      }
+      "required": true
     },
     {
       "id": "age",
@@ -61,7 +55,7 @@
       "validations": {
         "enableOn": {
           "fieldId": "salutation",
-          "value": "01"
+          "value": "02"
         }
       }
     },

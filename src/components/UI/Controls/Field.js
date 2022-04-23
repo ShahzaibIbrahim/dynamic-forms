@@ -16,6 +16,8 @@ const Field = (props) => {
     readOnly,
     disabled,
     options,
+    error,
+    errorMessage
   } = data;
 
   const isReadOnly = (readOnly === null || readOnly === undefined) ? false: readOnly;
@@ -41,7 +43,8 @@ const Field = (props) => {
             type={type}
             label={label}
             inputRef={inputValue}
-            helperText={description}
+            error={error}
+            helperText={error? errorMessage : description}
             value={value || ""}
             onChange={fieldChangeHandler}
             fullWidth
@@ -76,9 +79,8 @@ const Field = (props) => {
                 handleChange(id, newValue? newValue.value : '');
               }}
               fullWidth
-              required={required}
               renderInput={(params) => (
-                <TextField {...params} label={label} variant="standard" />
+                <TextField {...params} required={required} label={label} variant="standard" />
               )}
             />
           );

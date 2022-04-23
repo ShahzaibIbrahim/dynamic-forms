@@ -72,7 +72,7 @@ const Field = (props) => {
               options={options}
               id={id}
               readOnly={isReadOnly}
-              clearOnEscape
+              clearOnEscape 
               getOptionLabel={(option) => option.label}
               value={currentValue}
               onChange={(event, newValue) => {
@@ -80,7 +80,7 @@ const Field = (props) => {
               }}
               fullWidth
               renderInput={(params) => (
-                <TextField {...params} required={required} label={label} variant="standard" />
+                <TextField {...params}error={error} helperText={error? errorMessage : description} required={required} label={label} variant="standard" />
               )}
             />
           );

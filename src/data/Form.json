@@ -1,4 +1,6 @@
-[
+{
+  "url": "https://react-learning-a77f0-default-rtdb.firebaseio.com/user.json",
+  "inputs": [
     {
       "id": "salutation",
       "label": "Salutation",
@@ -72,3 +74,4 @@
       }
     }
   ]
+}

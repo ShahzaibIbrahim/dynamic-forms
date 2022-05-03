@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Field from "../Controls/Field";
 import Card from "../Controls/Card";
-import { Button } from "@mui/material";
+import { Button, LinearProgress, Alert } from "@mui/material";
 import AppModal from '../Modal/AppModal';
 import ErrorList from "../Controls/ErrorList";
+import { postFormData } from '../../../lib/api.js';
+import useHttp from "../../../hooks/use-http";
 import {
   isRequired,
   isReadOnly,
@@ -15,6 +17,7 @@ const Form = (props) => {
   const [fieldList, setFieldList] = useState(props.formData);
   const [errorList, setErrorList] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const {sendRequest, status, error } = useHttp(postFormData);
 
   const handleModalClose = () => {
     setModalIsOpen(false);
@@ -43,15 +46,13 @@ const Form = (props) => {
 
     
     if (errors.length > 0) {
-      console.log("Errors");
-      console.log(errors);
       setErrorList((prevErrors) => {
         return [...prevErrors, ...errors];
       });
       setModalIsOpen(true);
     } else {
-      console.log("Submitting Data");
       console.log(Object.fromEntries(submitData));
+      sendRequest(props.postUrl, Object.fromEntries(submitData));
     }
   };
 
@@ -115,6 +116,9 @@ const Form = (props) => {
 
   return (
     <Card>
+      {error !== null && <Alert severity="error">{error}</Alert>}
+      {status === 'completed' && <Alert severity="success">Data Submitted Successfully!</Alert>}
+      {status === 'pending' ? <LinearProgress/> : null}
       <AppModal open={modalIsOpen} handleClose={handleModalClose}><ErrorList errorList={errorList}/></AppModal>
       <form>
         {fieldList.map((data) => (

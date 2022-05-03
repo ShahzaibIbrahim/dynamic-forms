@@ -4,7 +4,7 @@ import formData from '../../data/Form.json';
 const DemoForm = () => {
   return (
     <div className="container">
-      <Form formData={formData}/>
+      <Form formData={formData.inputs} postUrl={formData.url}/>
     </div>
   );
 };

@@ -50,3 +50,22 @@ const resolveExpression = (value1, operator, value2) => {
         }  
         return condition;
 };
+
+export const fetchErrorList = (fieldList, submitData, errors) => {
+    for (const field of fieldList) {
+        if ( field.required && (field.value === undefined || field.value === null || field.value === "")) {
+          const errorMessage = `${field.label} is required`;
+          const newError = {
+            fieldId: field.id,
+            errorMessage: errorMessage,
+          };
+          field.error = true;
+          field.errorMessage = errorMessage;
+          errors.push(newError);
+        }
+  
+        if(!field.disabled) {
+          submitData.set(field.id, field.value ? field.value : "");
+        }
+      }
+}

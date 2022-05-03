@@ -11,6 +11,7 @@ import {
   isReadOnly,
   isDisabled,
   isEnabled,
+  fetchErrorList,
 } from "./FormValidationHelper";
 
 const Form = (props) => {
@@ -25,25 +26,12 @@ const Form = (props) => {
 
   const submitFormHandler = (event) => {
     event.preventDefault();
-    // Might Remove Disabled Fields Later
+    
     setErrorList([]);
     let errors = [];
-
     let submitData = new Map();
-    for (const field of fieldList) {
-      if ( field.required && (field.value === undefined || field.value === null || field.value === "")) {
-        const errorMessage = `${field.label} is required`;
-        const newError = {
-          fieldId: field.id,
-          errorMessage: errorMessage,
-        };
-        field.error = true;
-        field.errorMessage = errorMessage;
-        errors.push(newError);
-      }
-      submitData.set(field.id, field.value ? field.value : "");
-    }
 
+    fetchErrorList(fieldList, submitData, errors);
     
     if (errors.length > 0) {
       setErrorList((prevErrors) => {

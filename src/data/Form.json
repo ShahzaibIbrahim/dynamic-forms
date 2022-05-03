@@ -21,14 +21,20 @@
       "id": "firstName",
       "label": "First Name",
       "ctrlType": "TXT",
-      "type": "text",
       "required": true
+    },
+    {
+      "id": "dob",
+      "label": "Date Of Birth",
+      "ctrlType": "DAT",
+      "required": true,
+      "value": 839876400000,
+      "readOnly": true
     },
     {
       "id": "age",
       "label": "Age",
-      "ctrlType": "TXT",
-      "type": "number",
+      "ctrlType": "NUM",
       "validations": {
         "requiredOn": {
           "fieldId": "salutation",
@@ -40,7 +46,6 @@
       "id": "pob",
       "label": "Place Of Birth",
       "ctrlType": "TXT",
-      "type": "text",
       "value": "Madrid",
       "validations": {
         "readOnlyOn": {
@@ -53,7 +58,6 @@
       "id": "province",
       "label": "Province",
       "ctrlType": "TXT",
-      "type": "text",
       "validations": {
         "enableOn": {
           "fieldId": "salutation",
@@ -65,7 +69,6 @@
       "id": "country",
       "label": "Country",
       "ctrlType": "TXT",
-      "type": "text",
       "validations": {
         "disableOn": {
           "fieldId": "salutation",

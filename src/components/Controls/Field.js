@@ -4,6 +4,8 @@ import {
   Autocomplete,
   InputAdornment,
   IconButton,
+  Checkbox,
+  FormControlLabel,
 } from "@mui/material";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -103,16 +105,22 @@ const Field = (props) => {
           />
         );
       case "DAT":
-        const inputDate = value? new Date(value) : "";
+        const inputDate = value ? new Date(value) : "";
         return (
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
+              id={id}
               label={label}
               inputFormat="dd/MM/yyyy"
               value={inputDate}
               readOnly={isReadOnly}
               onChange={(newValue) => {
-                handleChange(id, newValue !== 'undefined' && newValue !==null ? newValue.getTime() : "");
+                handleChange(
+                  id,
+                  newValue !== "undefined" && newValue !== null
+                    ? newValue.getTime()
+                    : ""
+                );
               }}
               renderInput={(params) => (
                 <TextField
@@ -126,6 +134,22 @@ const Field = (props) => {
               )}
             />
           </LocalizationProvider>
+        );
+      case "CHK":
+        return (
+          <FormControlLabel
+            label={label}
+            control={
+              <Checkbox
+                id={id}
+                onChange={() => {
+                  handleChange(id, value ? !value : true);
+                }}
+                value={value}
+                checked={value}
+              />
+            }
+          />
         );
       case "DDL":
         const currentValue = value

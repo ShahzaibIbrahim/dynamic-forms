@@ -75,6 +75,12 @@
           "value": "01"
         }
       }
+    },
+    {
+      "id": "undertaking",
+      "label": "I agree to terms of services",
+      "ctrlType": "CHK",
+      "value" : true
     }
   ]
 }

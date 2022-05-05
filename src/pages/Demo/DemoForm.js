@@ -1,4 +1,4 @@
-import Form from "../../components/UI/Forms/Form";
+import Form from "../../components/Forms/Form";
 import formData from '../../data/Form.json';
 
 const DemoForm = () => {

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Field from "../Controls/Field";
-import Card from "../Controls/Card";
+import Card from "../UI/Card/Card";
 import { Button, LinearProgress, Alert } from "@mui/material";
-import AppModal from '../Modal/AppModal';
+import AppModal from '../UI/Modal/AppModal';
 import ErrorList from "../Controls/ErrorList";
-import { postFormData } from '../../../lib/api.js';
-import useHttp from "../../../hooks/use-http";
+import { postFormData } from '../../lib/api.js';
+import useHttp from "../../hooks/use-http";
 import {
   isRequired,
   isReadOnly,
@@ -45,6 +45,7 @@ const Form = (props) => {
   };
 
   const fieldChangeHanlder = (id, value) => {
+    console.log(value);
     const changeFieldIndex = fieldList.findIndex((x) => x.id === id);
     let updatedFieldList = [...fieldList];
     updatedFieldList[changeFieldIndex].value = value;

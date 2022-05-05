@@ -58,6 +58,7 @@
       "id": "province",
       "label": "Province",
       "ctrlType": "TXT",
+      "disabled" : true,
       "validations": {
         "enableOn": {
           "fieldId": "salutation",
@@ -80,7 +81,8 @@
       "id": "undertaking",
       "label": "I agree to terms of services",
       "ctrlType": "CHK",
-      "value" : true
+      "value" : true,
+      "readOnly": true
     }
   ]
 }

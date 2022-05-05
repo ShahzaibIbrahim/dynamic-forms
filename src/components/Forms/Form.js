@@ -106,7 +106,7 @@ const Form = (props) => {
   return (
     <Card>
       {error !== null && <Alert severity="error">{error}</Alert>}
-      {status === 'completed' && <Alert severity="success">Data Submitted Successfully!</Alert>}
+      {status === 'completed' && error===null && <Alert severity="success">Data Submitted Successfully!</Alert>}
       {status === 'pending' ? <LinearProgress/> : null}
       <AppModal open={modalIsOpen} handleClose={handleModalClose}><ErrorList errorList={errorList}/></AppModal>
       <form>

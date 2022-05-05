@@ -147,6 +147,7 @@ const Field = (props) => {
                 }}
                 value={value}
                 checked={value}
+                disabled={isReadOnly}
               />
             }
           />

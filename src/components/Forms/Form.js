@@ -45,7 +45,6 @@ const Form = (props) => {
   };
 
   const fieldChangeHanlder = (id, value) => {
-    console.log(value);
     const changeFieldIndex = fieldList.findIndex((x) => x.id === id);
     let updatedFieldList = [...fieldList];
     updatedFieldList[changeFieldIndex].value = value;
@@ -75,6 +74,12 @@ const Form = (props) => {
             field.validations.readOnlyOn,
             dependentField
           );
+        }
+        if (field.validations.copyTo) {
+          const dependentField = getFieldValue(
+            field.validations.copyTo.fieldId
+          );
+          dependentField.value = field.value;
         }
         if (field.validations.disableOn) {
           const dependentField = getFieldValue(

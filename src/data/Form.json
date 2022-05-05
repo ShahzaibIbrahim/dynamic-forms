@@ -21,15 +21,26 @@
       "id": "firstName",
       "label": "First Name",
       "ctrlType": "TXT",
-      "required": true
+      "required": true,
+      "validations":{
+        "copyTo": {
+          "fieldId" : "lastName"
+        }
+      }
+    },
+    {
+      "id": "lastName",
+      "label": "Last Name",
+      "ctrlType": "TXT",
+      "required": true,
+      "readOnly": true
     },
     {
       "id": "dob",
       "label": "Date Of Birth",
       "ctrlType": "DAT",
       "required": true,
-      "value": 839876400000,
-      "readOnly": true
+      "value": 839876400000
     },
     {
       "id": "age",

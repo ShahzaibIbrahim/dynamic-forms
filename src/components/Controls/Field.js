@@ -6,6 +6,9 @@ import {
   IconButton,
   Checkbox,
   FormControlLabel,
+  FormGroup,
+  FormControl,
+  FormHelperText,
 } from "@mui/material";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -137,20 +140,31 @@ const Field = (props) => {
         );
       case "CHK":
         return (
-          <FormControlLabel
-            label={label}
-            control={
-              <Checkbox
-                id={id}
-                onChange={() => {
-                  handleChange(id, value ? !value : true);
-                }}
-                value={value}
-                checked={value}
-                disabled={isReadOnly}
+          <FormControl
+            fullWidth
+            component="fieldset"
+            variant="standard"
+            required={required}
+            error={error}
+          >
+            <FormGroup>
+              <FormControlLabel
+                label={label}
+                control={
+                  <Checkbox
+                    id={id}
+                    onChange={() => {
+                      handleChange(id, value ? !value : true);
+                    }}
+                    value={value || false}
+                    checked={value || false}
+                    disabled={isReadOnly}
+                  />
+                }
               />
-            }
-          />
+            </FormGroup>
+            {error && <FormHelperText>{errorMessage}</FormHelperText>}
+          </FormControl>
         );
       case "DDL":
         const currentValue = value

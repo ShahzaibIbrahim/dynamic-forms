@@ -53,7 +53,7 @@ const resolveExpression = (value1, operator, value2) => {
 
 export const fetchErrorList = (fieldList, submitData, errors) => {
     for (const field of fieldList) {
-        if ( field.required && (field.value === undefined || field.value === null || field.value === "")) {
+        if ( field.required && (field.value === undefined || field.value === null || field.value === "" || field.value === false)) {
           const errorMessage = `${field.label} is required`;
           const newError = {
             fieldId: field.id,

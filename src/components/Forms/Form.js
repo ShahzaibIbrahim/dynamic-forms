@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Field from "../Controls/Field";
 import Card from "../UI/Card/Card";
 import { Button, LinearProgress, Alert } from "@mui/material";
-import AppModal from '../UI/Modal/AppModal';
 import ErrorList from "../Controls/ErrorList";
 import { postFormData } from '../../lib/api.js';
 import useHttp from "../../hooks/use-http";
@@ -117,7 +116,7 @@ const Form = (props) => {
       <ErrorList modalIsOpen={modalIsOpen} handleModalClose={handleModalClose} errorList={errorList}/>
       <form>
         {fieldList.map((data) => (
-          <Field key={data.id} data={data} handleChange={fieldChangeHanlder} />
+          <Field key={data.id} data={data}  handleChange={fieldChangeHanlder} />
         ))}
         <div style={{ marginTop: 20 }}>
           <Button

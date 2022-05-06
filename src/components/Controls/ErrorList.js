@@ -10,19 +10,11 @@ import {
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import AppModal from "../UI/Modal/AppModal";
+import ScrollIntoView from 'react-scroll-into-view'
 
 const ErrorList = (props) => {
   const errorList = props.errorList;
-
   
-  const goToViolation = (ref) => {
-    props.handleModalClose();
-    window.scrollTo({
-      top: ref.current.offsetTop,
-      behavior: "smooth",
-    });
-  };
-
   return (
     <AppModal open={props.modalIsOpen} handleClose={props.handleModalClose}>
       <Typography gutterBottom variant="h5" component="div" >
@@ -33,7 +25,8 @@ const ErrorList = (props) => {
         {errorList &&
           errorList.map((list) => (
             <div key={list.fieldId}>
-              <ListItem sx={{ margin: 0.01 }} onClick={props.handleModalClose}>
+              <ScrollIntoView smooth onClick={props.handleModalClose} selector={'#'+ list.fieldId}>
+              <ListItem sx={{ margin: 0.01 }}>
                 <ListItemButton>
                   <ListItemIcon>
                     <ArrowRightIcon />
@@ -41,6 +34,8 @@ const ErrorList = (props) => {
                   <ListItemText primary={list.errorMessage} />
                 </ListItemButton>
               </ListItem>
+              
+              </ScrollIntoView>
             </div>
           ))}
       </List>

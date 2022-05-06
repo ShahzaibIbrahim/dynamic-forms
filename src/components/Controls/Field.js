@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { React, useRef } from "react";
 import {
   TextField,
   Autocomplete,
@@ -16,7 +16,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import ClearIcon from "@mui/icons-material/Clear";
 
 const Field = (props) => {
-  const inputValue = useRef(null);
+  const myRef = useRef();
   const { handleChange, data } = props;
   const {
     id,
@@ -55,7 +55,7 @@ const Field = (props) => {
             id={id}
             type="text"
             label={label}
-            inputRef={inputValue}
+            inputRef={myRef}
             error={error}
             helperText={error ? errorMessage : description}
             value={value || ""}
@@ -84,7 +84,7 @@ const Field = (props) => {
             id={id}
             type="number"
             label={label}
-            inputRef={inputValue}
+            inputRef={myRef}
             error={error}
             helperText={error ? errorMessage : description}
             value={value || ""}

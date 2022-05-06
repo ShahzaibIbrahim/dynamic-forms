@@ -80,6 +80,7 @@ const Form = (props) => {
             field.validations.copyTo.fieldId
           );
           dependentField.value = field.value;
+          dependentField.error = false;
         }
         if (field.validations.disableOn) {
           const dependentField = getFieldValue(
@@ -113,7 +114,7 @@ const Form = (props) => {
       {error !== null && <Alert severity="error">{error}</Alert>}
       {status === 'completed' && error===null && <Alert severity="success">Data Submitted Successfully!</Alert>}
       {status === 'pending' ? <LinearProgress/> : null}
-      <AppModal open={modalIsOpen} handleClose={handleModalClose}><ErrorList errorList={errorList}/></AppModal>
+      <ErrorList modalIsOpen={modalIsOpen} handleModalClose={handleModalClose} errorList={errorList}/>
       <form>
         {fieldList.map((data) => (
           <Field key={data.id} data={data} handleChange={fieldChangeHanlder} />

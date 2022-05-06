@@ -6,10 +6,10 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 'auto',
   bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
+  border: '3px solid #000',
+  boxShadow: 48,
   pt: 2,
   px: 4,
   pb: 3,
@@ -29,7 +29,7 @@ const AppModal = (props) => {
       }}
     >
       <Fade in={props.open}>
-        <Box sx={{ ...style, width: 200 }}>{props.children}</Box>
+        <Box sx={{ ...style }}>{props.children}</Box>
       </Fade>
     </Modal>
   );

@@ -55,6 +55,7 @@ export const fetchErrorList = (fieldList, submitData, errors) => {
     for (const field of fieldList) {
         if ( field.required && (field.value === undefined || field.value === null || field.value === "" || field.value === false)) {
           const errorMessage = `${field.label} is required`;
+          console.log(field.inputRef);
           const newError = {
             fieldId: field.id,
             errorMessage: errorMessage,

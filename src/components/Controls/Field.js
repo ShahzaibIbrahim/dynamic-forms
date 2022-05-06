@@ -30,6 +30,7 @@ const Field = (props) => {
     options,
     error,
     errorMessage,
+    maxLength,
   } = data;
 
   const isReadOnly =
@@ -88,7 +89,16 @@ const Field = (props) => {
             error={error}
             helperText={error ? errorMessage : description}
             value={value || ""}
-            onChange={fieldChangeHandler}
+            onChange={(e) => {
+              if (maxLength) {
+                const val = Math.max(0, parseInt(e.target.value))
+                  .toString()
+                  .slice(0, maxLength);
+                handleChange(id, val);
+              } else {
+                handleChange(id, e.target.value);
+              }
+            }}
             fullWidth
             variant="standard"
             required={required}

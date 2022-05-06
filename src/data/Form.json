@@ -46,6 +46,7 @@
       "id": "age",
       "label": "Age",
       "ctrlType": "NUM",
+      "maxLength": 2,
       "validations": {
         "requiredOn": {
           "fieldId": "salutation",

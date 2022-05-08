@@ -17,3 +17,5 @@ code {
   padding: 100px;
   padding-left: 100px;
 }
+
+.input-disabled{background-color:#EBEBE4;border:1px #ABADB3;padding:2px 1px;}

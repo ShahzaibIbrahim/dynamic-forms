@@ -53,6 +53,7 @@ const Field = (props) => {
       case "TXT":
         return (
           <TextField
+            className={isReadOnly? 'input-disabled' : ''}
             id={id}
             type="text"
             label={label}

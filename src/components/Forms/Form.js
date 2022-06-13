@@ -109,7 +109,7 @@ const Form = (props) => {
   };
 
   return (
-    <Card>
+    <div>
       {error !== null && <Alert severity="error">{error}</Alert>}
       {status === 'completed' && error===null && <Alert severity="success">Data Submitted Successfully!</Alert>}
       {status === 'pending' ? <LinearProgress/> : null}
@@ -129,7 +129,7 @@ const Form = (props) => {
           </Button>
         </div>
       </form>
-    </Card>
+    </div>
   );
 };
 

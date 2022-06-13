@@ -79,17 +79,6 @@
       }
     },
     {
-      "id": "country",
-      "label": "Country",
-      "ctrlType": "TXT",
-      "validations": {
-        "disableOn": {
-          "fieldId": "salutation",
-          "value": "01"
-        }
-      }
-    },
-    {
       "id": "undertaking",
       "label": "I agree to terms of services",
       "ctrlType": "CHK",

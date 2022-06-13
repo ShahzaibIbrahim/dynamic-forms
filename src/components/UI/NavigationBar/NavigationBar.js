@@ -8,12 +8,12 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import AdbIcon from "@mui/icons-material/Adb";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import MenuItem from  "@mui/material/MenuItem";
 
 const pages = [
   { label: "Demo", key: "/" },
-  { label: "Play Ground", key: "/playGround" },
-  { label: "Welcome", key: "/welcome" },
+  { label: "Play Ground", key: "/playGround" }
 ];
 
 const NavigationBar = () => {
@@ -54,12 +54,10 @@ const NavigationBar = () => {
                   color: "white",
                 }}
               >
-                <NavLink
-                  sx={{ my: 2, color: "white", display: "block" }}
-                  to={page.key}
-                >
-                  {page.label}
-                </NavLink>
+                <Link to={page.key} style={{ textDecoration: "none", color:"inherit" }}>
+                  <MenuItem style={{ paddingLeft: 0 }}>{page.label}</MenuItem>
+                </Link>
+              
               </Typography>
             ))}
           </Box>

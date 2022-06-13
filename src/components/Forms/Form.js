@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Field from "../Controls/Field";
-import Card from "../UI/Card/Card";
 import { Button, LinearProgress, Alert } from "@mui/material";
 import ErrorList from "../Controls/ErrorList";
 import { postFormData } from '../../lib/api.js';
@@ -110,6 +109,7 @@ const Form = (props) => {
 
   return (
     <div>
+      {   console.log(fieldList) }
       {error !== null && <Alert severity="error">{error}</Alert>}
       {status === 'completed' && error===null && <Alert severity="success">Data Submitted Successfully!</Alert>}
       {status === 'pending' ? <LinearProgress/> : null}

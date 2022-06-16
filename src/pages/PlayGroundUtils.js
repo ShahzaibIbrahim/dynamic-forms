@@ -32,3 +32,32 @@ export const getTextInput = () => {
     required: true,
   };
 };
+
+
+export const getDateInput = () => {
+  return {
+    "id": "dateInputId",
+    "label": "Date Input",
+    "ctrlType": "DAT",
+    "required": true
+  };
+};
+
+export const getNumberInput = () => {
+  return {
+    "id": "numberInputId",
+    "label": "Number Input",
+    "ctrlType": "NUM",
+    "maxLength": 2,
+  };
+};
+
+export const getCheckBoxInput = () => {
+  return {
+    "id": "checkBoxId",
+    "label": "Check Box Input",
+    "ctrlType": "CHK",
+    "required": true
+  };
+};
+

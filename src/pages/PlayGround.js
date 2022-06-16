@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import Form from "../components/Forms/Form";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { getDDLInput, getBaseJson, getTextInput } from "./PlayGroundUtils";
+import { getDDLInput, getBaseJson, getTextInput, getDateInput, getNumberInput, getCheckBoxInput } from "./PlayGroundUtils";
 
 const PlayGround = () => {
   const [code, setCode] = useState();
@@ -55,6 +55,18 @@ const PlayGround = () => {
 
   const textInputHandler = () => {
     addFieldHandler(getTextInput());
+  };
+  
+  const dateInputHandler = () => {
+    addFieldHandler(getDateInput());
+  };
+  
+  const numberInputHandler = () => {
+    addFieldHandler(getNumberInput());
+  };
+  
+  const checkBoxInputHandler = () => {
+    addFieldHandler(getCheckBoxInput());
   };
 
   const addFieldHandler = (newInputObj) => {
@@ -104,6 +116,15 @@ const PlayGround = () => {
                   <Button m={5} p={2} onClick={textInputHandler} variant="contained">
                     Add Text Input
                   </Button>
+                  <Button m={5} p={2} onClick={dateInputHandler} variant="contained">
+                    Add Date Input
+                  </Button>
+                  <Button m={5} p={2} onClick={numberInputHandler} variant="contained">
+                    Add Number Input
+                  </Button>
+                  <Button m={5} p={2} onClick={checkBoxInputHandler} variant="contained">
+                    Add Check Box Input
+                  </Button>
                 </Box>
               </AccordionDetails>
             </Accordion>
@@ -133,7 +154,7 @@ const PlayGround = () => {
               />
               <Box sx={{ xs: 4 }}>
                 <Button p={2} onClick={clearJsonHandler} variant="contained">
-                  Clear
+                  Clear Inputs
                 </Button>
                 <Button p={5} onClick={formatJsonHandler} variant="contained">
                   Format JSON

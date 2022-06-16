@@ -62,9 +62,8 @@ const PlayGround = () => {
     const inputCount = formObj.inputs.length + 1;
     newInputObj.id = 'input' + inputCount;
     
-    const newInputs = formObj.inputs.concat(newInputObj);
-    formObj.inputs = newInputs;
-
+    const newInputs = [...formObj.inputs, newInputObj];
+    formObj.inputs = newInputs;    
     setInputJson(JSON.stringify(formObj, null, "\t"));
     setCode(formObj);
     handleFieldAddedAlert();

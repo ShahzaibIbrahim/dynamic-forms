@@ -13,10 +13,15 @@ import {
 } from "./FormValidationHelper";
 
 const Form = (props) => {
-  const [fieldList, setFieldList] = useState(props.formData);
+  const [fieldList, setFieldList] = useState([]);
   const [errorList, setErrorList] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const {sendRequest, status, error } = useHttp(postFormData);
+
+  
+  React.useEffect(()=>{
+    setFieldList(props.formData)
+  },[props.formData]);
 
   const handleModalClose = () => {
     setModalIsOpen(false);
@@ -106,10 +111,8 @@ const Form = (props) => {
     const field = fieldList.find((x) => x.id === fieldId);
     return field;
   };
-
   return (
     <div>
-      {   console.log(fieldList) }
       {error !== null && <Alert severity="error">{error}</Alert>}
       {status === 'completed' && error===null && <Alert severity="success">Data Submitted Successfully!</Alert>}
       {status === 'pending' ? <LinearProgress/> : null}
